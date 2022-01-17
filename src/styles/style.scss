@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400&display=swap');
+$box-color: #0a3b5a;
+
+@mixin themeColor {
+    background-color: #b2d9f1;
+    background-image: linear-gradient(135deg, #b2d9f1 0%, #2c3e50 100%);
+}
+@mixin centerFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    margin: auto 0;
+    @include themeColor();
+    font-family: "Poppins";
+}
+
+#main {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie {
+    background-color: $box-color;
+    letter-spacing: 1px;
+    width: 27vh;
+    margin: 1rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    height: 100%;
+
+    img {
+        width: 100%;
+    }
+
+    .overview {
+        font-size: 12px;
+        background-color: #fff;
+        padding: 1rem;
+        position: absolute;
+        max-height: 100%;
+        overflow: auto;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        transform: translateY(100%);
+        transition: transform 0.3s ease-in;
+
+        h3 {
+            margin-top: 0;
+        }
+
+    }
+
+    
+    &:hover {
+        cursor: pointer;
+        opacity: .5;
+        .overview {
+            transform: translateY(0%);
+        }
+
+    }
+
+    .movie-info {
+        font-size: 14px;
+        color: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem 0.5rem;
+
+        h3 {
+            margin: 0;
+        }
+        span {
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            
+            &.green {
+                background-color: rgb(8, 77, 8);
+            }
+            &.yellow {
+                background-color: rgb(182, 124, 16);
+            }
+            &.red {
+                background-color: rgb(129, 9, 9);
+            }
+        }
+    }
+    
+}
+
+header {
+    display: flex;
+    background-color: $box-color;
+    justify-content: flex-end;
+
+    input {
+        background: #fff;
+        border-radius: 50px;
+        border: 2px solid #16a085;
+        color: white;
+        display: block;
+        font-family: inherit;
+        font-size: 1rem;
+        margin: 20px;
+        outline: none;
+        padding: 0.5rem 1rem;
+        transition: 0.25s;
+        cursor: pointer;
+        
+      &:hover {
+        outline: none;;
+        background: #16a085;
+      }
+    }
+}

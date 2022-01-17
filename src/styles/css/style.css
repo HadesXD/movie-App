@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400&display=swap");
+body {
+  margin: auto 0;
+  background-color: #b2d9f1;
+  background-image: linear-gradient(135deg, #b2d9f1 0%, #2c3e50 100%);
+  font-family: "Poppins";
+}
+
+#main {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.movie {
+  background-color: #0a3b5a;
+  letter-spacing: 1px;
+  width: 27vh;
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  height: 100%;
+}
+
+.movie img {
+  width: 100%;
+}
+
+.movie .overview {
+  font-size: 12px;
+  background-color: #fff;
+  padding: 1rem;
+  position: absolute;
+  max-height: 100%;
+  overflow: auto;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  -webkit-transition: -webkit-transform 0.3s ease-in;
+  transition: -webkit-transform 0.3s ease-in;
+  transition: transform 0.3s ease-in;
+  transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
+}
+
+.movie .overview h3 {
+  margin-top: 0;
+}
+
+.movie:hover {
+  cursor: pointer;
+  opacity: .5;
+}
+
+.movie:hover .overview {
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+}
+
+.movie .movie-info {
+  font-size: 14px;
+  color: #eee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem;
+}
+
+.movie .movie-info h3 {
+  margin: 0;
+}
+
+.movie .movie-info span {
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.movie .movie-info span.green {
+  background-color: #084d08;
+}
+
+.movie .movie-info span.yellow {
+  background-color: #b67c10;
+}
+
+.movie .movie-info span.red {
+  background-color: #810909;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #0a3b5a;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+header input {
+  background: #fff;
+  border-radius: 50px;
+  border: 2px solid #16a085;
+  color: white;
+  display: block;
+  font-family: inherit;
+  font-size: 1rem;
+  margin: 20px;
+  outline: none;
+  padding: 0.5rem 1rem;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+header input:hover {
+  outline: none;
+  background: #16a085;
+}
+/*# sourceMappingURL=style.css.map */
