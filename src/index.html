@@ -5,15 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles\css\style.css">
+    <link rel="stylesheet" href="styles\css\style-card.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
     <script src="js/script.js" defer></script>
     <title>Movie Database</title>
 </head>
 <body>
-    <header>
-        <form id="searchForm">
-            <input id="search" type="text" placeholder="search"/>
-        </form>
-    </header>
-    <div id="main"></div>
+    <div id="general-display">
+        <header>
+            <form id="searchForm">
+                <input id="search" type="text" placeholder="search"/>
+            </form>
+        </header>
+        
+        <div class="promoted-movie">
+            <img src="../images/promotion_01.jpg" class="promotion-img" alt="">
+            
+            <div class="promotion-logo-and-text">
+                <img class="title-logo" src="../images/promotion_01_logo.png" title="Between" alt="Between">
+                <div class="promotion-synopsis">
+                    Peter Parker is unmasked and no longer able to separate <br/> 
+                    his normal life from the high-stakes of being a super-hero. <br/>
+                    When he asks for help from Doctor Strange the stakes become <br/>
+                    even more dangerous, forcing him to discover what it truly <br/>
+                    means to be Spider-Man.
+                </div>
+                <button class="color-primary" tabindex="-1" type="button"><div class="ltr-1ksxkn9"><div class="medium ltr-dguo2f" role="presentation">
+                    <span class="info-btn">Play</span></button>
+                   
+            </div>
+        </div>
+
+            <br/>
+            <h2>Popular Movies</h2>
+            <div id="movies-popularity"></div>
+            <br/>
+            <h2>Popular TV-Shows</h2>
+            <div id="shows-popularity"></div>
+    </div>
+    <br/>
+
+    <div id="card-info" class="card-container" hidden></div>    
+
 </body>
 </html>
