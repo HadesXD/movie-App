@@ -4,23 +4,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FilmDen</title>
-    <link rel="stylesheet" href="styles\filmDen\style.css">
+    <link rel="stylesheet" href="styles\css\style-login.css">
   </head>
   <body>
-    <h1>nigga</h1>
-    <form id="signUpForm" class="box" method="POST" action="/signup">
+    <form id="reg-form" class="box" method="POST" action="/signup" autocomplete="off" >
       <h1>Sign Up</h1>
-      <input type="text" name="username" required="required" placeholder="Username"/>
-      <input type="text" name="email" required="required" placeholder="Email"/>
-      <input type="password" name="password" required="required" placeholder="Password"/>
+      <input type="text" id="username" required="required" placeholder="Username"/>
+      <input type="text" id="email" required="required" placeholder="Email"/>
+      <input type="password" id="password" required="required" placeholder="Password"/>
       <label class="container">Show Password
         <input type="checkbox" name="checkbox" value="true">
         <span class="checkmark"></span>
       </label>
-      <input type="password" name="passwordConfirm" required="required" placeholder="Confirm Password"/>
+      <input type="password" id="passwordConfirm" required="required" placeholder="Confirm Password"/>
       <input type="submit" name="signup" value="Sign Up"/>
       <div>Already have an account?</div>
       <a href="login">Login!</a>
     </form>
+
+    <script>
+        const form = document.getElementById('reg-form');
+        form.addEventListener('submit', registerUser);
+
+        async function registerUser(event){
+          event.preventDefault();
+          
+          const username = document.getElementById('username').value;
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          //const confirmPass = document.getElementById('passwordConfirm');
+
+          const result = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username,
+              email,
+              password
+            })
+          }).then((res) => res.json());
+
+          if (result.status === 'ok') alert('Sucess');
+          else alert(result.error);
+        }
+    </script>
   </body>
 </html>

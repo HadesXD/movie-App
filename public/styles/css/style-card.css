@@ -53,7 +53,7 @@ body {
 
 .movie .menu i {
   font-size: 40px;
-  color: #fe4141;
+  color: #1a7dbb;
   -webkit-filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
           filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
 }
@@ -97,14 +97,14 @@ body {
 }
 
 .action-btn i {
-  color: #fe4141;
+  color: #1a7dbb;
   font-size: 28px;
   text-align: right;
 }
 
 .watch-btn {
   display: block;
-  border: 1px solid #fe4141;
+  border: 1px solid #1a7dbb;
   border-radius: 5px;
   padding: 4px;
   width: 140px;
@@ -141,7 +141,7 @@ h1 {
 h3 {
   font-size: 14px;
   font-weight: 400;
-  color: #fe4141;
+  color: #1a7dbb;
 }
 
 h5 {
@@ -154,7 +154,7 @@ h5 {
 }
 
 .movie-likes li {
-  color: #fe4141;
+  color: #1a7dbb;
 }
 
 .movie-likes li:last-child {
