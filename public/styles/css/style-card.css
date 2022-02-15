@@ -53,7 +53,7 @@ body {
 
 .movie .menu i {
   font-size: 40px;
-  color: #1a7dbb;
+  color: #a0274b;
   -webkit-filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
           filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
 }
@@ -94,17 +94,18 @@ body {
 
 .action-btn {
   text-align: right;
+  cursor: pointer;
 }
 
 .action-btn i {
-  color: #1a7dbb;
+  color: #a0274b;
   font-size: 28px;
   text-align: right;
 }
 
 .watch-btn {
   display: block;
-  border: 1px solid #1a7dbb;
+  border: 1px solid #a0274b;
   border-radius: 5px;
   padding: 4px;
   width: 140px;
@@ -141,7 +142,7 @@ h1 {
 h3 {
   font-size: 14px;
   font-weight: 400;
-  color: #1a7dbb;
+  color: #a0274b;
 }
 
 h5 {
@@ -154,7 +155,7 @@ h5 {
 }
 
 .movie-likes li {
-  color: #1a7dbb;
+  color: #a0274b;
 }
 
 .movie-likes li:last-child {
@@ -209,7 +210,7 @@ h5 {
   margin: 0 auto;
 }
 
-.elements-distance, .movie-details, .movie-description, .movie-credit-type, .movie-credit-induvidual {
+.elements-distance, .movie-details, .movie-description, .movie-credit-type {
   margin: 0px;
 }
 

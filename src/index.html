@@ -4,67 +4,72 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- My Styling -->
     <link rel="stylesheet" href="styles/css/style.css">
     <link rel="stylesheet" href="styles/css/style-card.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <!-- Font Awesome styles -->
+    <!--<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>-->
+    <script src="https://kit.fontawesome.com/a91f261fbd.js" crossorigin="anonymous"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
     <script src="js/script.js" type="text/javascript" defer></script>
+
       <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="package/css/swiper.min.css">
-    <link rel="stylesheet" href="styles/css/style-grid.css">
+
 
     <title>Movie Database</title>
 </head>
 
-<div id="general-display">
 
 
 <header>
-  <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
-  <label for="openSidebarMenu" class="sidebarIconToggle">
-    <div class="spinner diagonal part-1"></div>
-    <div class="spinner horizontal"></div>
-    <div class="spinner diagonal part-2"></div>
-  </label>
-  <div id="sidebarMenu">
-    <ul class="sidebarMenuInner">
-      <li>Jelena Jovanovic <span>Web Developer</span></li>
-      <li><a href="https://vanila.io" target="_blank">Anime</a></li>
-      <li><a href="https://instagram.com/plavookac" target="_blank">Criime Movies</a></li>
-      <li><a href="https://twitter.com/plavookac" target="_blank">Independent Movies</a></li>
-      <li><a href="https://www.youtube.com/channel/UCDfZM0IK6RBgud8HYGFXAJg" target="_blank">Thriller Movies</a></li>
-      <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Horror Movies</a></li>
-      <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Children & Family Movies</a></li>
-      <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">TV Shows</a></li>
-      <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Romantic Movies</a></li>
-      <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Comedies</a></li>
-      <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Music & Musicals</a></li>
-      <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Sci-Fi & Fantasy</a></li>
-      <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Action & Adventure</a></li>
-    </ul>
-  </div>
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+      <div class="spinner diagonal part-1"></div>
+      <div class="spinner horizontal"></div>
+      <div class="spinner diagonal part-2"></div>
+    </label>
+    <div id="sidebarMenu">
+      <ul class="sidebarMenuInner">
+        <li><a href="profile"><span id="user">Current user</span></a></li>
+        <li><a href="https://vanila.io" target="_blank">Anime</a></li>
+        <li><a href="https://instagram.com/plavookac" target="_blank">Criime Movies</a></li>
+        <li><a href="https://twitter.com/plavookac" target="_blank">Independent Movies</a></li>
+        <li><a href="https://www.youtube.com/channel/UCDfZM0IK6RBgud8HYGFXAJg" target="_blank">Thriller Movies</a></li>
+        <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Horror Movies</a></li>
+        <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Children & Family Movies</a></li>
+        <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">TV Shows</a></li>
+        <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Romantic Movies</a></li>
+        <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Comedies</a></li>
+        <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Music & Musicals</a></li>
+        <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Sci-Fi & Fantasy</a></li>
+        <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Action & Adventure</a></li>
+      </ul>
+    </div>
+    <form id="searchForm">
+      <input id="search" class="search-button" type="text" placeholder="search"/>
+    </form>
 </header>
 
 
-    <!--
-    <div id="general-display">
-        <header>
-            <form id="searchForm">
-                <input id="search" type="text" placeholder="search"/>
-            </form>
-        </header>-->
 
+<body onload="homePage()">
 
-<body>
+<br/>
+<br/>
+    <div id="cunt">
         <div class="promoted-movie">
             <img src="../images/promotion_01.jpg" class="promotion-img" alt="">
             
             <div class="promotion-logo-and-text">
                 <img class="title-logo" src="../images/promotion_01_logo.png" title="Between" alt="Between">
+                <br/><br/>
                 <div class="promotion-synopsis">
                     Peter Parker is unmasked and no longer able to separate <br/> 
                     his normal life from the high-stakes of being a super-hero. <br/>
@@ -77,6 +82,8 @@
                    
             </div>
         </div>
+
+        <div id="searched-movies"></div>
 
         <h2>Popular Films</h2>
         <div class="swiper-container">
@@ -92,11 +99,42 @@
           <div class="swiper-button-prev"></div>
         </div>
 
-    </div>
+        <h2>Popular Anime</h2>
+        <div class="swiper-container">
+          <div id="anime-popularity" class="swiper-wrapper"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
 
+        <h2>Drama Films</h2>
+        <div class="swiper-container">
+          <div id="drama-popularity" class="swiper-wrapper"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
 
-    <div id="card-info" class="card-container" hidden></div>
+        <h2>Horror Films</h2>
+        <div class="swiper-container">
+          <div id="horror-popularity" class="swiper-wrapper"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+
+        <h2>Horror Films</h2>
+        <div class="swiper-container">
+          <div id="horror-popularity" class="swiper-wrapper"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+
+      </div>
+
+    <!--<div id="card-info" class="card-container" hidden></div>-->
     
+    <div id="card-info" class="popup-container hidden"></div>
+    <div id="main-display"></div>
+
+
 
     <!-- Swiper JS -->
     <script src="package/js/swiper.min.js"></script>
@@ -105,7 +143,7 @@
     <script>
         const myCustomSlider = document.querySelectorAll('.swiper-container');
 
-        var swiper = new Swiper('.swiper-container', {
+        let swiper = new Swiper('.swiper-container', {
             observer: true,
             observeParents: true,
             observeSlideChildren: true,
@@ -124,19 +162,23 @@
 
         for( i=0; i< myCustomSlider.length; i++ ) {
             let firstMove = true;
-           
-            let dick = myCustomSlider[i].swiper;
+            let allSwipers = myCustomSlider[i].swiper;
             
-
-            dick.on('slideChange', function() {
+            allSwipers.on('slideChange', function() {
             if (firstMove) {
                 firstMove = false;
                 this.slideTo(0, 0);
-            }
-            });
-
+            }});
         }
     </script>
+
+    <script>
+        (() => {
+  		let username = localStorage.getItem('username');
+		document.getElementById("user").innerHTML = "Current user: " + username;
+	})();
+    </script>
+
 </body>
 
 </html>

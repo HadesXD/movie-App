@@ -2,8 +2,7 @@
 $box-color: #1e1b26;
 
 @mixin themeColor {
-    background-color: #9ebdd1;
-    background-image: linear-gradient(135deg, #b2d9f1 0%, #2c3e50 100%);
+    background: linear-gradient(180deg, $box-color 0%, #3b536b 100%);
 }
 @mixin centerFlex {
     display: flex;
@@ -15,10 +14,27 @@ $box-color: #1e1b26;
 body {
     margin: 0 auto;
     @include themeColor();
-    font-family: "Poppins";
+    font-family: 'Poppins', sans-serif;    
     background-repeat: no-repeat;
+
+    h2 {
+        padding-left: 1rem;
+        padding-top: 1rem;
+        font-size: 20px;
+        color: rgb(219, 219, 219);
+    }
+    .view-more-link {
+        @include centerFlex;
+        color: rgb(59, 115, 168);
+        cursor: pointer;
+    }
 }
 
+.fav-h3 {
+    font-size: 20px;
+    color: rgb(219, 219, 219);
+    @include centerFlex;
+}
 
 #card-info {
     .visible {
@@ -31,17 +47,17 @@ body {
 }
 
 .hidden {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
 }
 
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
+}
 
-/*
-.bg
-{
-  width: 100%;
-  z-index: 0;
-  height: 1200px;
-}*/
 
 /* HEADER AND SEARCH */
 
@@ -58,7 +74,6 @@ header {
     z-index: 10;
 
     //display: flex;
-    justify-content: flex-end;
 
     input {
         background: #fff;
@@ -67,11 +82,14 @@ header {
         color: white;
         display: block;
         font-family: inherit;
-        font-size: 1rem;
-        margin: 20px;
+        //font-size: 1rem;
+        margin: 5px 5px 5px;
+        margin-left: auto;
         outline: none;
         padding: 0.5rem 1rem;
+        margin-top: 10px;
         transition: 0.25s;
+        width: 400px;
         cursor: pointer;
         
       &:hover {
@@ -79,7 +97,11 @@ header {
         background: #16a085;
       }
     }
+
+
 }
+
+/* Styling for the sidebar, left to the header */
 
 #sidebarMenu {
     z-index: 2; 
@@ -92,7 +114,6 @@ header {
     transition: transform 250ms ease-in-out;
     background: linear-gradient(180deg, $box-color 0%, #2c3e50 100%);
 }
-
 .sidebarMenuInner{
     margin:0;
     padding:0;
@@ -121,15 +142,30 @@ header {
         }
     }
 }
-
-input[type="checkbox"]:checked ~ #sidebarMenu {
-    transform: translateX(0);
-}
-
 input[type=checkbox] {
     transition: all 0.3s;
     box-sizing: border-box;
     display: none;
+}
+input[type="checkbox"]:checked ~ #sidebarMenu {
+    transform: translateX(0);
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    opacity: 0;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(135deg);
+    margin-top: 8px;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(-135deg);
+    margin-top: -9px;
 }
 .sidebarIconToggle {
     transition: all 0.3s;
@@ -172,32 +208,187 @@ input[type=checkbox] {
     float: left;
     margin-top: 3px;
 }
-input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    opacity: 0;
+
+/* Styling for the unique induvidual cards */
+
+.card {
+    background-color: $box-color;
+    letter-spacing: 1px;
+    width: 24vh;
+    margin: 1rem;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 500ms;
+
+    img {
+        height: 35vh;
+        width: 100%;
+    }
+    
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        z-index: 1;
+    }
+
+    .card-info {
+        font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+        color: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        //padding: 0.5rem 1rem 0.5rem;
+
+        p {
+            margin: 0;
+        }
+        
+        span {
+            align-items: center;
+            background-color: #f68d01;
+            border-radius: 50%;
+            box-shadow: 0 0 1em rgba(0, 0, 0, 0.25);
+            display: flex;
+            height: 2.25em;
+            justify-content: center;
+            padding: 0.5em;
+            position: absolute;
+            right: 0;
+            text-align: center;
+            top: 75%;
+            transform: translateX(50%);
+            width: 2.25em;
+            
+            &.green { background-color: rgb(8, 77, 8); }
+            &.yellow { background-color: rgb(182, 124, 16); }
+            &.red { background-color: rgb(129, 9, 9); }
+            &.grey { background-color: rgb(66, 65, 65); }
+        }
+    }
 }
-input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    transform: rotate(135deg);
-    margin-top: 8px;
-}
-input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    transform: rotate(-135deg);
-    margin-top: -9px;
+
+.fav-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    a {
+
+    }
 }
 
 
-/* PROMOTED MOVIE */
+.main-grid {
+    display: flex;
+    flex-wrap: wrap;
+    //overflow-x: auto;
+ 
+      /* Track 
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+    }
+       
+      /* Handle 
+    &::-webkit-scrollbar-thumb {
+        background: $box-color; 
+        border-radius: 10px;
+    }
+      
+      /* Handle on hover 
+    &::-webkit-scrollbar-thumb:hover {
+        background: $box-color; 
+    }*/
+}
+
+.popup-container {
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+  
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  
+  .popup {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0 2rem;
+    position: relative;
+    max-width: 400px;
+    max-height: 100vh;
+    overflow-y: auto;
+    width: 100%;
+  }
+  
+  .popup h1 {
+    text-align: center;
+  }
+  
+  .popup .close-popup {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+
+// Minor Swipper styling
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+  
+:root {
+    --swiper-theme-color: #fff;
+}
+  
+.netflix-slider {
+    .swiper-wrapper {
+        padding: 20px 0;
+    }
+
+    .swiper-slide {
+        transition: 250ms all;
+  
+        &:hover {
+            transform: scale(1.2);
+            z-index: 1;
+        }
+  
+        &:first-child:hover{
+            margin:0 40px;
+        }
+  
+        &:last-child:hover{
+            margin:0 -40px;
+        }
+    }
+}
+
+/* Static styling for the promoted movie */
 
 .promoted-movie {
     position: relative;
 
     img {
-        height: 530px;
+        height: 520px;
         width: 100%;
         object-fit: cover;
     }
@@ -205,7 +396,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     .promotion-logo-and-text{
         position: absolute;
         left: 40px;
-        top: 0px;
+        top: 24px;
     }
     
     .title-logo {
@@ -243,96 +434,4 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     button.play:hover {
     transform: scale(1.1);
     }
-}
-
-/*
-#movies-popularity {
-    display: flex;
-    flex-wrap: nowrap;
-    //overflow-x: auto;
-
-    .card {
-        flex: 0 0 auto;
-    }
-
-    &::-webkit-scrollbar {
-        width: 20px;
-    }
-      
-      /* Track 
-    &::-webkit-scrollbar-track {
-
-        box-shadow: inset 0 0 5px grey; 
-        border-radius: 10px;
-    }
-       
-      /* Handle 
-    &::-webkit-scrollbar-thumb {
-        background: $box-color; 
-        border-radius: 10px;
-    }
-      
-      /* Handle on hover 
-    &::-webkit-scrollbar-thumb:hover {
-        background: $box-color; 
-    }
-}*/
-
-.card {
-    background-color: $box-color;
-    letter-spacing: 1px;
-    width: 24vh;
-    margin: 1rem;
-    position: relative;
-    border-radius: 3px;
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 500ms;
-
-    img {
-        height: 35vh;
-        width: 100%;
-    }
-    
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-        z-index: 1;
-    }
-
-    .card-info {
-        font-family: 'Poppins', sans-serif;
-        font-size: 18px;
-        color: #eee;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.5rem 1rem 0.5rem;
-
-        p {
-            margin: 0;
-        }
-
-        span {
-            align-items: center;
-            background-color: #f68d01;
-            border-radius: 50%;
-            box-shadow: 0 0 1em rgba(0, 0, 0, 0.25);
-            display: flex;
-            height: 2.25em;
-            justify-content: center;
-            padding: 0.5em;
-            position: absolute;
-            right: 0;
-            text-align: center;
-            top: 75%;
-            transform: translateX(50%);
-            width: 2.25em;
-            
-            &.green { background-color: rgb(8, 77, 8); }
-            &.yellow { background-color: rgb(182, 124, 16); }
-            &.red { background-color: rgb(129, 9, 9); }
-            &.grey { background-color: rgb(66, 65, 65); }
-        }
-    }
-    
 }

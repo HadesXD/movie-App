@@ -1,10 +1,45 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400&display=swap");
 body {
   margin: 0 auto;
-  background-color: #9ebdd1;
-  background-image: linear-gradient(135deg, #b2d9f1 0%, #2c3e50 100%);
-  font-family: "Poppins";
+  background: -webkit-gradient(linear, left top, left bottom, from(#1e1b26), to(#3b536b));
+  background: linear-gradient(180deg, #1e1b26 0%, #3b536b 100%);
+  font-family: 'Poppins', sans-serif;
   background-repeat: no-repeat;
+}
+
+body h2 {
+  padding-left: 1rem;
+  padding-top: 1rem;
+  font-size: 20px;
+  color: #dbdbdb;
+}
+
+body .view-more-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #3b73a8;
+  cursor: pointer;
+}
+
+.fav-h3 {
+  font-size: 20px;
+  color: #dbdbdb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #card-info .visible {
@@ -15,16 +50,19 @@ body {
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s linear 300ms, opacity 300ms;
+  transition: visibility 0s linear 300ms, opacity 300ms;
 }
 
-/*
-.bg
-{
-  width: 100%;
-  z-index: 0;
-  height: 1200px;
-}*/
+.visible {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: visibility 0s linear 0s, opacity 300ms;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
 /* HEADER AND SEARCH */
 header {
   display: block;
@@ -38,9 +76,6 @@ header {
   height: 60px !important;
   overflow: hidden;
   z-index: 10;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
 }
 
 header input {
@@ -50,12 +85,14 @@ header input {
   color: white;
   display: block;
   font-family: inherit;
-  font-size: 1rem;
-  margin: 20px;
+  margin: 5px 5px 5px;
+  margin-left: auto;
   outline: none;
   padding: 0.5rem 1rem;
+  margin-top: 10px;
   -webkit-transition: 0.25s;
   transition: 0.25s;
+  width: 400px;
   cursor: pointer;
 }
 
@@ -64,6 +101,7 @@ header input:hover {
   background: #16a085;
 }
 
+/* Styling for the sidebar, left to the header */
 #sidebarMenu {
   z-index: 2;
   height: 100%;
@@ -111,17 +149,45 @@ header input:hover {
   text-decoration: none;
 }
 
-input[type="checkbox"]:checked ~ #sidebarMenu {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-}
-
 input[type=checkbox] {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   display: none;
+}
+
+input[type="checkbox"]:checked ~ #sidebarMenu {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  opacity: 0;
+}
+
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+  margin-top: 8px;
+}
+
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+  margin-top: -9px;
 }
 
 .sidebarIconToggle {
@@ -180,124 +246,7 @@ input[type=checkbox] {
   margin-top: 3px;
 }
 
-input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  opacity: 0;
-}
-
-input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-transform: rotate(135deg);
-          transform: rotate(135deg);
-  margin-top: 8px;
-}
-
-input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-transform: rotate(-135deg);
-          transform: rotate(-135deg);
-  margin-top: -9px;
-}
-
-/* PROMOTED MOVIE */
-.promoted-movie {
-  position: relative;
-}
-
-.promoted-movie img {
-  height: 530px;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.promoted-movie .promotion-logo-and-text {
-  position: absolute;
-  left: 40px;
-  top: 0px;
-}
-
-.promoted-movie .title-logo {
-  width: auto;
-  height: 20vh;
-}
-
-.promoted-movie .promotion-synopsis {
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-}
-
-.promoted-movie .button-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.promoted-movie button {
-  background-color: rgba(30, 30, 30, 0.7);
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin: 10px;
-  padding: 15px 40px;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-}
-
-.promoted-movie button:hover {
-  background-color: white;
-  color: black;
-}
-
-.promoted-movie button.play:hover {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-}
-
-/*
-#movies-popularity {
-    display: flex;
-    flex-wrap: nowrap;
-    //overflow-x: auto;
-
-    .card {
-        flex: 0 0 auto;
-    }
-
-    &::-webkit-scrollbar {
-        width: 20px;
-    }
-      
-      /* Track 
-    &::-webkit-scrollbar-track {
-
-        box-shadow: inset 0 0 5px grey; 
-        border-radius: 10px;
-    }
-       
-      /* Handle 
-    &::-webkit-scrollbar-thumb {
-        background: $box-color; 
-        border-radius: 10px;
-    }
-      
-      /* Handle on hover 
-    &::-webkit-scrollbar-thumb:hover {
-        background: $box-color; 
-    }
-}*/
+/* Styling for the unique induvidual cards */
 .card {
   background-color: #1e1b26;
   letter-spacing: 1px;
@@ -338,7 +287,6 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 0.5rem 1rem 0.5rem;
 }
 
 .card .card-info p {
@@ -384,5 +332,182 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 
 .card .card-info span.grey {
   background-color: #424141;
+}
+
+.fav-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  /* Track 
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+    }
+       
+      /* Handle 
+    &::-webkit-scrollbar-thumb {
+        background: $box-color; 
+        border-radius: 10px;
+    }
+      
+      /* Handle on hover 
+    &::-webkit-scrollbar-thumb:hover {
+        background: $box-color; 
+    }*/
+}
+
+.popup-container {
+  background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.popup-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.popup {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 0 2rem;
+  position: relative;
+  max-width: 400px;
+  max-height: 100vh;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.popup h1 {
+  text-align: center;
+}
+
+.popup .close-popup {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+:root {
+  --swiper-theme-color: #fff;
+}
+
+.netflix-slider .swiper-wrapper {
+  padding: 20px 0;
+}
+
+.netflix-slider .swiper-slide {
+  -webkit-transition: 250ms all;
+  transition: 250ms all;
+}
+
+.netflix-slider .swiper-slide:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  z-index: 1;
+}
+
+.netflix-slider .swiper-slide:first-child:hover {
+  margin: 0 40px;
+}
+
+.netflix-slider .swiper-slide:last-child:hover {
+  margin: 0 -40px;
+}
+
+/* Static styling for the promoted movie */
+.promoted-movie {
+  position: relative;
+}
+
+.promoted-movie img {
+  height: 520px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.promoted-movie .promotion-logo-and-text {
+  position: absolute;
+  left: 40px;
+  top: 24px;
+}
+
+.promoted-movie .title-logo {
+  width: auto;
+  height: 20vh;
+}
+
+.promoted-movie .promotion-synopsis {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
+
+.promoted-movie .button-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.promoted-movie button {
+  background-color: rgba(30, 30, 30, 0.7);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 10px;
+  padding: 15px 40px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.promoted-movie button:hover {
+  background-color: white;
+  color: black;
+}
+
+.promoted-movie button.play:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 /*# sourceMappingURL=style.css.map */

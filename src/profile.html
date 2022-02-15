@@ -3,81 +3,131 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- To use Google Poppins Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
-    <style>
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
+    <!-- Font Awesome styles -->
+    <script src="https://kit.fontawesome.com/a91f261fbd.js" crossorigin="anonymous"></script>
 
-li {
-  float: left;
-}
 
-li a, .dropbtn {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
+    <!-- My Styling -->
+    <link rel="stylesheet" href="styles/css/style.css">
+    <link rel="stylesheet" href="styles/css/style-card.css">
+    <link rel="stylesheet" href="styles/css/style-login.css">
 
-li a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
-}
-
-li.dropdown {
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1;}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-    </style>
-
+    <script src="js/script.js" type="text/javascript" defer>  
+    </script>
+    <title>My Profile</title>
 </head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#news">News</a></li>
-                <li class="dropdown">
-                  <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
-                  <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                  </div>
-                </li>
-              </ul>
-              
-              <h3>Dropdown Menu inside a Navigation Bar</h3>
-              <p>Hover over the "Dropdown" link to see the dropdown menu.</p>
-        </nav>
-    </header>
+
+
+
+
+<body onload="accountData();">
+
+  <header>
+    <i class="fa-solid fa-house" style="cursor: pointer; color: white; padding: 0.75rem 0.75rem 0.75rem 1rem; font-size: xx-large;" onclick="homeButton()"></i>
+    <i class="fa-solid fa-right-from-bracket" style="cursor: pointer; color: white; padding: 0.75rem 0.75rem 0.75rem 1rem; font-size: xx-large;" onclick="logout()"></i>
+    <i class="fa-solid fa-gear" style="cursor: pointer; color: white; padding: 0.75rem 0.75rem 0.75rem 1rem; font-size: xx-large;" onclick="editUserData()"></i>
+  </header>
+
+  <br/>
+
+  <div class="profile-container">
+    <img id="myImg" src="images/profiles/default_pfp.png" alt="profile pic" class="box-img">
+    <h1 id="username"></h1>
+  <h5 id="email">something@gmail.com</h5>
+  </div>
+
+  <br/>
+  <h3 class="fav-h3">Favorites by user</h3>
+  <div id="user-favs" class="fav-grid"></div>
+  <a class="view-more-link">View more</a>
+
+  <div id="card-info" class="popup-container hidden"></div>
+
+
+
+    <div id="edit-user-popup" class="popup-container hidden">
+      <form id="update-form" class="box" method="POST" action="/update" autocomplete="off" >
+        <div class="close-button"><i class="fa-solid fa-xmark" class="close-popup" ></i></div>
+        <h1>Edit Profile</h1>
+        <input type="text" id="new-username" required="required" placeholder="Username"/>
+        <input type="text" id="new-email" required="required" placeholder="Email"/>
+        <input type="password" id="old-password" required="required" placeholder="Old Password"/>
+        <label class="container">Show Password
+          <input type="checkbox" id="toggle-password" value="true">
+          <span class="checkmark"></span>
+        </label>
+        <input type="password" id="new-password" required="required" placeholder="New Password"/>
+        <input type="submit" name="update" value="Update"/>
+      </form>
+
+  </div>
+
 </body>
+
+<script>
+    (() => {
+      let username = localStorage.getItem('username');
+      document.getElementById("username").innerHTML = username;
+      let email = localStorage.getItem('email');
+      document.getElementById("email").innerHTML = email;
+      })();
+
+        // opens the popup with the recipe & ingredients about the meal.
+  function editUserData() {
+    const userPopup = document.getElementById('edit-user-popup');
+    userPopup.classList.remove('hidden');
+}
+</script>
+
+<script>
+  const oldPassword = document.getElementById("old-password");
+  const newPassword = document.getElementById("new-password");
+
+  const togglePassword = document.getElementById("toggle-password");
+  togglePassword.addEventListener("click", toggleClicked);
+
+  function toggleClicked() { 
+    this.checked ? oldPassword.type = "text" : oldPassword.type = "password";
+    this.checked ? newPassword.type = "text" : newPassword.type = "password";
+  }
+
+  const form = document.getElementById('update-form');
+  form.addEventListener('submit', updateUser);
+
+      async function updateUser(event){
+        event.preventDefault();
+        
+        const token = localStorage.getItem('token');
+        const username = document.getElementById('new-username').value;
+        const email = document.getElementById('new-email').value;
+        const oldPassword = document.getElementById('old-password').value;
+        const password = document.getElementById('new-password').value;
+
+        const result = await fetch('/api/update', { // see app.js, line 52
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username,
+            email,
+            oldPassword,
+            password,
+            token
+          })
+        }).then((res) => res.json());
+
+        if (result.status === 'ok') {
+          alert('You have sucessfully registered!');
+          window.location = 'profile';
+        } else alert("The Error: " + result.error);
+      }
+</script>
+
 </html>
+
+
+
