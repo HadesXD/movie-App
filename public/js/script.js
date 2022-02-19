@@ -4,11 +4,8 @@ const API_TV_GENERAL_PATH = 'https://api.themoviedb.org/3/tv/';
 
 const API_KEY = 'a32c49fc09517c91448d1166045ea031';
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280/';
-const API_SEARCH ="https://api.themoviedb.org/3/search/movie?sort_by=popularity.desc&&api_key=a32c49fc09517c91448d1166045ea031&query=";
 
-const formEl = document.getElementById('searchForm')
-const searchEl = document.getElementById('search');
-
+// Simple function for setting the color of the average_score.
 function setColor(score) {
     if (score >= 7) return "green";
     else if (score >= 5) return "yellow";
@@ -16,13 +13,20 @@ function setColor(score) {
     else return "grey";
 }
 
+
+/* 
+ * The most important function, this async function fetches the data of various films from its API. The movies will presented
+ * in cards that will be displayed on a swipper. Each card has it's unique ID and attribute function to display further details
+ * of the presented card (film or tv show).
+ */
+
 async function fetchAPI(element, API_FETCH, mediaType) {
     console.log("API: " + API_FETCH);
     
     const response = await fetch(API_FETCH);
     const responseData = await response.json();
 
-    if (responseData.results){
+    if (responseData.results){      // If multiple results
         responseData.results.forEach(movie => {
             const container = document.createElement('div');
             container.id = movie.id;
@@ -43,9 +47,7 @@ async function fetchAPI(element, API_FETCH, mediaType) {
     
             element.appendChild(container);
         });
-    }
-
-    else {
+    } else {      // if single result
         const container = document.createElement('div');
         container.id = responseData.id;
         container.setAttribute("onclick","showFilmCard(" + container.id + ")");
@@ -63,21 +65,29 @@ async function fetchAPI(element, API_FETCH, mediaType) {
     }
 }
 
-formEl.addEventListener('submit', (e) => {
+const searchFormEL = document.getElementById('searchForm')
+const searchValueEL = document.getElementById('search');
+
+searchFormEL.addEventListener('submit', (e) => {
     e.preventDefault();
-    const textValue = searchEl.value;
+    const textValue = searchValueEL.value;
 
     if (textValue) {
         getSearchedMovies(textValue);
-        searchEl.value = "";
+        searchValueEL.value = "";
     }
 })
 
+/* 
+ * The search values are sent here and then new movies are posted.
+ */
+
 async function getSearchedMovies(value) {
-    const el = document.getElementById('main-display');
-    el.innerHTML = "";
-    const el2 = document.getElementById('cunt');
-    el2.innerHTML = "";
+    const API_SEARCH = 'https://api.themoviedb.org/3/search/movie?sort_by=popularity.desc&&api_key=' + API_KEY + '&query=';
+
+    const searchedContentEL = document.getElementById('search-display'); searchedContentEL.innerHTML = "";
+    const bodyContentEL = document.getElementById('body-content'); bodyContentEL.innerHTML = "";
+
     const response = await fetch(API_SEARCH + value);
     const responseData = await response.json();
 
@@ -86,7 +96,10 @@ async function getSearchedMovies(value) {
 
     responseData.results.forEach(movie => {
         const container = document.createElement('div');
+        container.id = movie.id;
         container.classList.add('card');
+        container.setAttribute("onclick","showFilmCard(" + container.id + ")");
+
         container.innerHTML = `
             <img src="${getPosterImg(movie.poster_path)}" 
                 alt="${movie.title}">
@@ -98,7 +111,7 @@ async function getSearchedMovies(value) {
 
         //console.log(movie);
         mainGrid.appendChild(container);
-        el.appendChild(mainGrid);
+        searchedContentEL.appendChild(mainGrid);
 
     })
 }
@@ -201,9 +214,6 @@ async function showCard(cardID, mediaType) {
         </div>
     </div>`;
 
-    
- 
-
     card.appendChild(container);
     card.classList.remove('hidden');
     
@@ -236,8 +246,10 @@ function showTvCard(cardID) {
 function closeButton() {
     selectedCard = "";
 
-    const card = document.getElementsByClassName('popup-container')[0];
-    card.classList.add('hidden');
+    const card1 = document.getElementsByClassName('popup-container')[0];
+    card1.classList.add('hidden');
+    const card2 = document.getElementsByClassName('popup-container')[1];
+    card2.classList.add('hidden');
 }
 
 async function favButton() {
@@ -261,7 +273,8 @@ async function favButton() {
 }
 
 /*
- * Update the local storage with the logged in User.
+ * This function will update the profile with the most recent information on the user from MongoDB.
+ * The local storage is also updated along with the favorties menu.
  */
 
 async function accountData() {
@@ -294,6 +307,8 @@ async function accountData() {
         localStorage.setItem('picture-path', parsedData[0].picture);
         localStorage.setItem('description', parsedData[0].description);
 
+        document.getElementById('email').innerHTML = parsedData[0].email;
+
     } else alert(result.error);
 }
 
@@ -313,17 +328,23 @@ function homePage() {
     const API_most_popular_anime = 'https://api.themoviedb.org/3/discover/tv?api_key=a32c49fc09517c91448d1166045ea031&language=en-US&sort_by=popularity.desc&page=1&with_keywords=210024';
     const API_drama_films = 'https://api.themoviedb.org/3/discover/movie?api_key=a32c49fc09517c91448d1166045ea031&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=18'
     const API_horror_films = 'https://api.themoviedb.org/3/discover/movie?api_key=a32c49fc09517c91448d1166045ea031&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=27'
-
+    const API_cartoon_films = 'https://api.themoviedb.org/3/discover/movie?api_key=a32c49fc09517c91448d1166045ea031&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=16';
+    const API_romance_films = 'https://api.themoviedb.org/3/discover/movie?api_key=a32c49fc09517c91448d1166045ea031&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749';
 
     const filmsEL = document.getElementById('movies-popularity');
     const tvShowsEL = document.getElementById('tvShows-popularity');
     const animeEL = document.getElementById('anime-popularity');
     const dramaFilmsEL = document.getElementById('drama-popularity');
-    const horrorFilmsEL = document.getElementById('horror-popularity')
+    const horrorFilmsEL = document.getElementById('horror-popularity');
+    const cartoonFilmsEL = document.getElementById('cartoon-popularity');
+    const romanceFilmsEL = document.getElementById('romance-popularity');
 
     fetchAPI(filmsEL, API_most_popular_films, "movie");
     fetchAPI(tvShowsEL, API_most_popular_tv, "tv");
     fetchAPI(animeEL, API_most_popular_anime, "tv");
     fetchAPI(dramaFilmsEL, API_drama_films, "movie")
     fetchAPI(horrorFilmsEL, API_horror_films, "movie")
+
+    fetchAPI(cartoonFilmsEL, API_cartoon_films, "movie")
+    fetchAPI(romanceFilmsEL, API_romance_films, "movie")
 }

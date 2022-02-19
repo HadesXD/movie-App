@@ -37,7 +37,7 @@ header {
 
 .close-button i {
   font-size: 40px;
-  color: red;
+  color: #a0274b;
   -webkit-filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
           filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
 }

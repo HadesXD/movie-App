@@ -18,7 +18,7 @@
       </label>
       <input type="submit" name="login" value="Login"/>
       <div>Don't have an account?</div>
-        <a href="signup">Register now!</a>
+        <a href="reg">Register now!</a>
     </form>
 
     
@@ -52,8 +52,8 @@
 
         if (result.status === 'ok') {
           console.log('Got the token: ', result.data)
-					localStorage.setItem('token', result.data)
-          localStorage.setItem('username', username)
+            localStorage.setItem('token', result.data)
+            localStorage.setItem('username', username)
           alert('You have sucessfully logged in!');
           window.location.href="/";
         } else alert(result.error);

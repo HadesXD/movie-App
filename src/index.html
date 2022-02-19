@@ -8,20 +8,17 @@
     <!-- My Styling -->
     <link rel="stylesheet" href="styles/css/style.css">
     <link rel="stylesheet" href="styles/css/style-card.css">
+    <!-- My Script -->
+    <script src="js/script.js" type="text/javascript" defer></script>
 
     <!-- Font Awesome styles -->
-    <!--<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>-->
     <script src="https://kit.fontawesome.com/a91f261fbd.js" crossorigin="anonymous"></script>
-
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-
-    <script src="js/script.js" type="text/javascript" defer></script>
-
-      <!-- Link Swiper's CSS -->
+      <!-- Swiper's CSS -->
     <link rel="stylesheet" href="package/css/swiper.min.css">
-
 
     <title>Movie Database</title>
 </head>
@@ -37,7 +34,7 @@
     </label>
     <div id="sidebarMenu">
       <ul class="sidebarMenuInner">
-        <li><a href="profile"><span id="user">Current user</span></a></li>
+        <li><a href="profile"><span id="user">user</span></a></li>
         <li><a href="https://vanila.io" target="_blank">Anime</a></li>
         <li><a href="https://instagram.com/plavookac" target="_blank">Criime Movies</a></li>
         <li><a href="https://twitter.com/plavookac" target="_blank">Independent Movies</a></li>
@@ -63,7 +60,7 @@
 
 <br/>
 <br/>
-    <div id="cunt">
+    <div id="body-content">
         <div class="promoted-movie">
             <img src="../images/promotion_01.jpg" class="promotion-img" alt="">
             
@@ -120,26 +117,30 @@
           <div class="swiper-button-prev"></div>
         </div>
 
-        <h2>Horror Films</h2>
+        <h2>Animated/Cartoon Films</h2>
         <div class="swiper-container">
-          <div id="horror-popularity" class="swiper-wrapper"></div>
+          <div id="cartoon-popularity" class="swiper-wrapper"></div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
         </div>
 
-      </div>
+        <h2>Romance Films</h2>
+        <div class="swiper-container">
+          <div id="romance-popularity" class="swiper-wrapper"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+
+    </div>
 
     <!--<div id="card-info" class="card-container" hidden></div>-->
     
+    <div id="search-display"></div>
     <div id="card-info" class="popup-container hidden"></div>
-    <div id="main-display"></div>
-
-
 
     <!-- Swiper JS -->
     <script src="package/js/swiper.min.js"></script>
-
-    <!-- Initialize Swiper -->
+    <!-- Initialize Swipers -->
     <script>
         const myCustomSlider = document.querySelectorAll('.swiper-container');
 
@@ -173,12 +174,11 @@
     </script>
 
     <script>
+      // Alaways updated!
         (() => {
-  		let username = localStorage.getItem('username');
-		document.getElementById("user").innerHTML = "Current user: " + username;
-	})();
+          let username = localStorage.getItem('username');
+          document.getElementById("user").innerHTML = "User: " + username;
+        })();
     </script>
-
 </body>
-
 </html>

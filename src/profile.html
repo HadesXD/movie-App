@@ -42,17 +42,15 @@
   </div>
 
   <br/>
-  <h3 class="fav-h3">Favorites by user</h3>
+  <h3 class="fav-h3">My Favorites</h3>
   <div id="user-favs" class="fav-grid"></div>
   <a class="view-more-link">View more</a>
 
   <div id="card-info" class="popup-container hidden"></div>
 
-
-
     <div id="edit-user-popup" class="popup-container hidden">
       <form id="update-form" class="box" method="POST" action="/update" autocomplete="off" >
-        <div class="close-button"><i class="fa-solid fa-xmark" class="close-popup" ></i></div>
+        <div class="close-button"><i class="fa-solid fa-xmark" onclick="closeButton()" ></i></div>
         <h1>Edit Profile</h1>
         <input type="text" id="new-username" required="required" placeholder="Username"/>
         <input type="text" id="new-email" required="required" placeholder="Email"/>
@@ -121,8 +119,8 @@
         }).then((res) => res.json());
 
         if (result.status === 'ok') {
-          alert('You have sucessfully registered!');
-          window.location = 'profile';
+          alert('You have sucessfully updated!');
+          location.reload();
         } else alert("The Error: " + result.error);
       }
 </script>

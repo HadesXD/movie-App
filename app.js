@@ -38,7 +38,9 @@ app.get('/', (req, res) => {
     if (localStorage.getItem("token") === null) {
         res.sendFile(__dirname + '/src/login.html');
       }*/
+
     res.sendFile(__dirname + '/src/index.html');
+    //req.query.query()
     //res.render('index');
 })
 
@@ -109,38 +111,74 @@ app.post('/api/login', async(req, res) => {
 	res.json({ status: 'error', error: 'Invalid username/password' })
 })
 
+/*
+ * The function will simply return the user's data.
+ */
 
-app.post('/api/get-favs', async (req, res) => {
-
+app.post('/api/get-user-data', async (req, res) => {
     const { token } = req.body;
 
     try 
     {
         const user = jwt.verify(token, JWT_SECRET);
         const _id = user.id;
-
-        const myObject = await User.find({_id: _id}, 'favorites -_id');
+        const myObject = await User.find({_id: _id});
         
         //myObject[0].favorites.forEach(item =>  console.log("item: " + item));
-
-        const favorites = JSON.stringify(myObject[0].favorites);
-        res.json({ status: "ok", data: favorites })
+        res.json({ status: "ok", data: JSON.stringify(myObject) })
 
     } catch (error) {
         console.log("eror: " + error);
         res.json({ status: 'error: ' + error });
     }
+})
 
+/*
+ * The function will update the selected user's private infromation.
+ * The username, email and password will all be updated.
+ */
 
+app.post('/api/update', async (req, res) => {
+    const { username, email, oldPassword, password: originalPassword, token } = req.body;
+
+    if (!username || typeof username !== 'string') return res.json({ status: 'error', error: 'Invalid username.'});
+    if (!originalPassword || typeof originalPassword !== 'string') return res.json({ status: 'error', error: 'Invalid password.'});
+    if (originalPassword === oldPassword) return res.json({ status: 'error', error: 'Your new password should be New lol.'});
+    if (originalPassword.length < 5) return res.json({ status: 'error', error: 'Password should be at least 6 characters.'});
+
+    try {
+		const user = jwt.verify(token, JWT_SECRET)
+		const _id = user.id;
+		const password = await bcrypt.hash(originalPassword, 10);
+
+		await User.updateOne(
+			{ _id },
+			{ $set: { 
+                    username,
+                    email,
+                    password 
+                }
+			}
+		)
+		res.json({ status: 'ok' })
+	} catch (error) {
+        console.log("eror: " + error);
+        res.json({ status: 'error: ' + error });
+	}
 });
+
+/*
+ * Like the api/update this function also updates the user. But this time we updated
+ * his favorites selection.
+ */
 
 app.post('/api/update-fav', async (req, res) => {
     const { token } = req.body;
     const { cardID } = req.body;
     console.log("this token: " + token + "\ncardID: " +cardID);
+
     try {
         const user = jwt.verify(token, JWT_SECRET);
-        console.log("user: " + user.id);
         const _id = user.id;
 
         await User.updateOne(
@@ -153,69 +191,7 @@ app.post('/api/update-fav', async (req, res) => {
         res.json({ status: 'error: ' + error });
     }
 
-
     res.json({ status: 'ok' })
 })
 
-app.post('/api/get-user-data', async (req, res) => {
-    const { token } = req.body;
-
-    try 
-    {
-        const user = jwt.verify(token, JWT_SECRET);
-        const _id = user.id;
-
-        const myObject = await User.find({_id: _id});
-        
-        //myObject[0].favorites.forEach(item =>  console.log("item: " + item));
-
-
-
-        res.json({ status: "ok", data: JSON.stringify(myObject) })
-
-    } catch (error) {
-        console.log("eror: " + error);
-        res.json({ status: 'error: ' + error });
-    }
-})
-
-
-
-app.post('/api/update', async (req, res) => {
-    const { username, email, oldPassword, password: originalPassword, token } = req.body;
-
-    console.log("our username uwu: " + originalPassword);
-    if (!username || typeof username !== 'string') return res.json({ status: 'error', error: 'Invalid username.'});
-    if (!originalPassword || typeof originalPassword !== 'string') return res.json({ status: 'error', error: 'Invalid password.'});
-    if (originalPassword != oldPassword) return res.json({ status: 'error', error: 'Your new password should be New lol.'});
-    if (originalPassword.length < 5) return res.json({ status: 'error', error: 'Password should be at least 6 characters.'});
-
-    try {
-		const user = jwt.verify(token, JWT_SECRET)
-		const _id = user.id
-
-		const password = await bcrypt.hash(originalPassword, 10)
-
-		await User.updateOne(
-			{ _id },
-			{
-				$set: { 
-                    username,
-                    email,
-                    password 
-                }
-			}
-		)
-		res.json({ status: 'ok' })
-	} catch (error) {
-		console.log(error)
-		res.json({ status: 'error', error: ';))' })
-	}
-});
-
-
-
 app.listen(port, () => console.info(`Listening on port ${port}`));
-
-
-
